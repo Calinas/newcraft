@@ -1,0 +1,1011 @@
+@import "_import_common";
+$color-font-yellow: #c5934b;
+@mixin double-ellipsis {
+    .double-ellipsis {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+}
+.commonWrapper {
+    padding: 12px;
+    background-color: #fff;
+    color: #969696;
+}
+@mixin contentBlock {
+    .contentBlock {
+        background-color: #fff;
+        margin-bottom: 15px;
+        @include padding-15;
+        @include border-1px($color-divider);
+        &__title {
+            padding: 10px 0;
+            @include dl;
+            dt {
+                @include font-weight-700;
+            }
+            .iconfont {
+                color: $color-main-grey;
+                font-weight: 300;
+            }
+        }
+        &__desc {
+            padding: 10px 0;
+        }
+    }
+}
+
+@mixin flag {
+    .flag {
+        display: table;
+        width: 100%;
+        img {
+            width: 100%;
+        }
+        @for $i from 1 to 100 {
+            .flag__item--width#{$i}{
+                width: #{$i+'%'};
+            }
+        }
+        &__item {
+            display: table-cell;
+            &--middle {
+                vertical-align: middle;
+            }
+            &--top {
+                vertical-align: top;
+            }
+            &--bottom {
+                vertical-align: bottom;
+            }
+            &--yellow {
+                background-color: #e4ad5a;
+                color: #fff;
+            }
+            &--disabled {
+                position: relative;
+                .mask {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    background: rgba(0, 0, 0, .1);
+                }
+            }
+        }
+        &__item + &__item {
+            padding-left: 10px;
+        }
+        @include dl;
+    }
+}
+
+@mixin textWrapper {
+    .text {
+        color: $color-main-grey;
+        @include double-ellipsis;
+    }
+}
+
+@mixin goodsCard {
+    .goodsCard {
+        margin-top: 5px;
+        ul {
+            overflow: hidden;
+            li {
+                float: left;
+                width: 49%;
+                padding-bottom: 0.8rem;
+                margin-bottom: 0.7rem;
+                background-color: #fff;
+                &:nth-child(2n+1) {
+                    margin-right: 2%;
+                }
+            }
+        }
+        dl {
+            @include dl;
+            padding: 0 10px;
+            overflow: hidden;
+        }
+        &__imgWrapper {
+            width: 100%;
+        }
+        &__img {
+            width: 100%;
+        }
+        &__title {
+            @include single-ellipsis;
+            padding-top: 10px;
+            font-size: 1.4rem;
+            color: #1a1a1a;
+            padding-bottom: 6px;
+            text-align: left;
+            padding-left: 1rem;
+        }
+        &__price {
+            color: $color-red;
+            font-size: 13px;
+        }
+        &__attr {
+            font-size: 1.1rem;
+            &--red {
+                color: #fff;
+                background-color: $color-red;
+                border-radius: 8px;
+                padding: 0 2px;
+            }
+        }
+        &__readcount {
+            padding-left: 18px;
+            background: url(../../assets/collect-grey.png) no-repeat left center;
+            background-size: 14px;
+            color: #999;
+            font-size: 1.2rem;
+        }
+        &__brand {
+            font-size: 12px;
+            color: $color-font-grey;
+            width: 40%;
+            white-space: nowrap;
+            overflow: hidden;
+            -ms-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            text-align: right;
+        }
+        &__title {
+            overflow: hidden;
+            white-space: nowrap;
+            -ms-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            padding-top: 10px;
+            font-size: 1.4rem;
+            color: #1a1a1a;
+            padding-bottom: 6px;
+            text-align: left;
+            padding-left: 1rem;
+        }
+    }
+}
+
+@mixin brandCard {
+    .brandCard {
+        margin-top: 5px;
+        ul {
+            overflow: hidden;
+            li {
+                float: left;
+                width: 22.6%;
+                margin-right: 3%;
+                &:last-child {
+                    margin-right: 0;
+                }
+            }
+        }
+        &__imgWrapper {
+            width: 100%;
+        }
+        &__img {
+            width: 100%;
+        }
+        &__name {
+            @include single-ellipsis;
+            padding-top: 10px;
+            font-size: 1.2rem;
+            text-align: center;
+        }
+    }
+}
+
+@mixin activityCard {
+    .activityCard {
+        margin-top: 5px;
+        position: relative;
+        color: $color-font-grey;
+        @include dl;
+        &__img {
+            width: 100%;
+        }
+        &__tag {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 50px;
+            height: 20px;
+            line-height: 20px;
+            color: #fff;
+            font-size: 13px;
+            text-align: center;
+            &--going {
+                background-color: $color-red;
+            }
+        }
+        &__title {
+            @include double-ellipsis;
+            padding-top: 10px;
+            color: #1a1a1a;
+        }
+        &__city {
+            font-size: 1.2rem;
+        }
+        &__address {
+            font-size: 1.2rem;
+        }
+        &__price {
+            &--redBig {
+                font-size: 1.6rem;
+                color: $color-red;
+            }
+        }
+    }
+}
+
+@mixin tieziCard {
+    .tieziCard {
+        @include dl;
+        color: $color-font-grey;
+
+        &__title {
+            width: 70%;
+            @include single-ellipsis;
+            color: #1a1a1a;
+            padding-bottom: 8px;
+        }
+        &__time {
+            font-size: 1.2rem;
+        }
+        &__desc {
+            @include double-ellipsis;
+            font-size: 1.2rem;
+            line-height: 1.6rem;
+            margin-bottom: 1.4rem;
+        }
+        &__imgWrapper {
+            overflow: hidden;
+            padding-bottom: 10px;
+            li {
+                float: left;
+                width: 23%;
+                margin-right: 2%;
+                overflow: hidden;
+                margin-bottom: 8px;
+                img {
+                    width: 100%;
+                }
+            }
+        }
+    }
+}
+
+@mixin bannerCard {
+    .bannerCard {
+        margin-bottom: 12px;
+        background-color: #fff;
+        .font-red {
+            margin-right: 1.6rem;
+        }
+        &__imgWrapper {
+            position: relative;
+        }
+        &--padding {
+            padding: 0 12px;
+        }
+        &__img {
+            width: 100%;
+        }
+        &__flag {
+            padding-bottom: 10px;
+        }
+        &__tag {
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding: 0 8px;
+            height: 20px;
+            line-height: 20px;
+            color: #fff;
+            font-size: 12px;
+            text-align: center;
+            &--blue {
+                background-color: $color-font-lightGreen;
+            }
+            &--bottom {
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                padding: 0 8px;
+                height: 20px;
+                line-height: 20px;
+                color: #fff;
+                font-size: 13px;
+                text-align: center;
+            }
+        }
+        &__title {
+            @include double-ellipsis;
+            padding-top: 10px;
+            color: #1a1a1a;
+        }
+        &__btn {
+            display: inline-block;
+            color: #fff;
+            text-align: center;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-justify-content: center;
+            padding: 4px 0;
+        }
+        &__btn--grey {
+            background-color: $color-font-grey;
+            color: #fff;
+        }
+        &__btn--red {
+            background-color: $color-font-red;
+            color: #fff;
+        }
+    }
+}
+@mixin text {
+    .text {
+        line-height: 1.6rem;
+        &--grey {
+            color: $color-font-grey;
+        }
+    }
+}
+
+@mixin lineTitle {
+    .lineTitle {
+        text-align: center;
+        .center-title {
+            margin: 0 10px;
+            color: #1a1a1a;
+            font-size: 1.4rem;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        i {
+            display: inline-block;
+            width: 14px;
+            height: 1px;
+            background-color: #1a1a1a;
+            vertical-align: middle;
+        }
+    }
+}
+
+@mixin dotTitle {
+    .dotTitle{
+        text-align: center;
+        padding: 10px 0;
+        background-color: #fff;
+        .center-title {
+            margin: 0 10px;
+            color: #1a1a1a;
+            font-size: 1.4rem;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        i {
+            display: inline-block;
+            width: 3px;
+            height: 3px;
+            background-color: #1a1a1a;
+            vertical-align: middle;
+        }
+    }
+
+}
+
+@mixin commentBgText {
+    .comment-bg {
+        background-color: #f2f2f2;
+        padding: 10px;
+        color: $color-font-grey;
+        font-size: 1.3rem;
+        &__title {
+            color: #1a1a1a;
+            font-size: 1.4rem;
+        }
+    }
+}
+
+@mixin tab {
+    .tab {
+        overflow: hidden;
+        background-color: #fff;
+        font-size: 1.4rem;
+        &__item {
+            float: left;
+            width: 50%;
+        }
+        &__item--width90 {
+            width: 90%;
+            text-align: center;
+            margin: 0 auto;
+            padding: 10px 0;
+        }
+        &__item--width100 {
+            width: 100%;
+            text-align: center;
+            margin: 0 auto;
+            padding: 10px 0;
+        }
+        &__item--width40 {
+            width: 40%;
+            text-align: center;
+            margin: 0 auto;
+            padding: 10px 0;
+        }
+        &__item--active {
+            border-bottom: 3px solid $color-red;
+        }
+    }
+}
+
+@mixin title {
+    .title {
+        &--underline {
+            position: relative;
+            text-align: center;
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            &:after {
+                position: absolute;
+                content: '';
+                display: block;
+                width: 40px;
+                height: 1px;
+                background-color: $color-font-grey;
+                bottom: 0;
+                left: 50%;
+                margin-left: -20px;
+            }
+        }
+        &--black {
+            color: #1a1a1a;
+        }
+        &--doubleEllipsis {
+            @include double-ellipsis;
+        }
+    }
+}
+
+@mixin button {
+    .button {
+        margin: 0 auto;
+        border: none;
+        border-radius: 4px;
+        text-align: center;
+        &--white {
+            box-shadow: inset 0 0 1px $color-font-grey, inset 0 0 1px 0 $color-font-grey;
+            color: $color-font-grey;
+            padding: 0 12px;
+            line-height: 30px;
+        }
+        &--big {
+            height: 40px;
+            line-height: 40px;
+        }
+        &--width40 {
+            width: 40%;
+        }
+        &--width90 {
+            width: 90%;
+        }
+        &--green {
+            background-color: $color-font-lightGreen;
+            color: #fff;
+        }
+        &--red {
+            box-shadow: inset 0 0 1px $color-red, inset 0 0 1px 0 $color-red;
+            color: $color-font-red;
+            padding: 0 12px;
+            line-height: 30px;
+        }
+        &--round {
+            border-radius: 4px;
+        }
+        &--noborder {
+            border-radius: 0;
+        }
+        &--black {
+            box-shadow: inset 0 0 1px $color-font-title, inset 0 0 1px 0 $color-font-title;
+            color: $color-font-title;
+            padding: 0 12px;
+            line-height: 32px;
+        }
+        &--greenBorder {
+            background-color: $color-font-green;
+            color: $color-font-green;
+        }
+    }
+}
+
+@mixin fixedBottom {
+    .fixed-bottom {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 50px;
+        line-height: 50px;
+        overflow: hidden;
+        width: 100%;
+        background-color: #fff;
+        &--grey {
+            background-color: $color-font-grey;
+            color: #fff;
+        }
+        &--red {
+            background-color: $color-font-red;
+            color: #fff;
+        }
+        &__item {
+            float: left;
+        }
+        &__item--width20 {
+            width: 20%;
+        }
+        &__item--width30 {
+            width: 30%;
+        }
+        &__item--width40 {
+            width: 40%;
+        }
+        &__item--width70 {
+            width: 70%;
+        }
+        &__item--width100 {
+            width: 100%;
+        }
+        &__item--yellow {
+            background-color: $color-font-yellow;
+        }
+        &__item--red {
+            background-color: #982424;
+        }
+        &__item--white {
+            background-color: #fff;
+            border-top: 1px solid $color-divider;
+        }
+        &__item--icon {
+            border-top: 1px solid $color-divider;
+            img {
+                display: block;
+                width: 15px;
+                height: 15px;
+                margin: 5px auto 0;
+            }
+            span {
+                display: block;
+                height: 30px;
+                line-height: 30px;
+                color: rgb(0, 0, 0);
+                font-size: 12px;
+            }
+        }
+        &__item--twoLine {
+            span {
+                display: block;
+                font-size: 1.3rem;
+                color: #fff;
+            }
+        }
+    }
+    .fixed-button {
+        height: 50px;
+        line-height: 50px;
+        overflow: hidden;
+        width: 100%;
+        background-color: #fff;
+        &__item {
+            float: left;
+        }
+        &__item--width20 {
+            width: 20%;
+        }
+        &__item--width30 {
+            width: 30%;
+        }
+        &__item--width60 {
+            width: 60%;
+        }
+        &__item--width40 {
+            width: 40%;
+        }
+        &__item--width70 {
+            width: 70%;
+        }
+        &__item--width100 {
+            width: 100%;
+        }
+        &__item--yellow {
+            background-color: $color-font-yellow;
+        }
+        &__item--red {
+            background-color: #982424;
+        }
+        &__item--white {
+            background-color: #fff;
+            border-top: 1px solid $color-divider;
+        }
+        &__item--grey {
+            background-color: #a8a8a8;
+            color: #fff;
+        }
+        &__item--icon {
+            border-top: 1px solid $color-divider;
+            img {
+                display: block;
+                width: 15px;
+                height: 15px;
+                margin: 5px auto 0;
+            }
+            span {
+                display: block;
+                height: 30px;
+                line-height: 30px;
+                color: rgb(0, 0, 0);
+                font-size: 12px;
+            }
+        }
+        &__item--twoLine {
+            span {
+                display: block;
+                font-size: 1.3rem;
+                color: #fff;
+                height: 25px;
+                &.first {
+                    line-height: 30px;
+                }
+                &.second {
+                    line-height: 20px;
+                }
+            }
+        }
+    }
+}
+
+@mixin orderDetail {
+    .orderDetail {
+        margin-bottom: 0;
+        padding: 15px 0;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        &__check {
+            width: 10%;
+            padding-top: 7%;
+        }
+        &__img {
+            width: 22%;
+            overflow: hidden;
+            margin-right: 10px;
+            img {
+                width: 100%;
+            }
+            &--disabled {
+                position: relative;
+                .mask {
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 100%;
+                    font-size: 1.6rem;
+                    background: rgba(225, 225, 225, .8);
+                    color: #fff;
+                    text-align: center;
+                    padding-top: 30%;
+                }
+            }
+        }
+        &__textWrapper {
+            flex: 3;
+            overflow: hidden;
+            position: relative;
+        }
+        &__title {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            &--doubleLine {
+                -webkit-line-clamp: 2;
+                line-height: 18px;
+                font-size: 14px;
+            }
+        }
+        &__attr {
+            display: block;
+            overflow: hidden;
+            white-space: nowrap;
+            -ms-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            color: #969696;
+            font-size: 1.2rem;
+            &--up {
+                line-height: 16px;
+            }
+        }
+        &__price {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            line-height: 1rem;
+        }
+        &__category {
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+        &__quantity {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            button {
+                float: left;
+                display: inline-block;
+                width: 2.4em;
+                height: 2em;
+                margin-top: 0.5em;
+                line-height: 1em;
+                font-size: 1em;
+                text-align: center;
+                border: 1px solid #ccc;
+                padding: 0;
+                background: none;
+                color: #969696;
+            }
+            input {
+                width: 2.4em;
+                text-align: center;
+                line-height: 1.5em;
+                margin-top: 0.5em;
+                float: left;
+                border: 1px solid #ccc;
+                font-size: 1em;
+                padding: 0px;
+                height: 2em;
+                border-left: none;
+                border-right: none;
+            }
+        }
+    }
+}
+
+@mixin shopInput {
+    .shop {
+        padding: 0 15px;
+        &__title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            padding: 12px 0;
+        }
+        &__input {
+            input {
+                border: 1px solid #ccc;
+                padding: 8px;
+                font-size: 1.2rem;
+                border-radius: 2px;
+                width: 100%;
+            }
+        }
+        &__textarea {
+            textarea {
+                width: 100%;
+                resize: none;
+                border: 1px solid #ccc;
+                padding: 8px;
+                font-size: 1.2rem;
+                border-radius: 2px;
+                height: 150px;
+            }
+        }
+        &__button {
+            margin-top: 30px;
+        }
+        &__img {
+            width: 25%;
+        }
+    }
+}
+
+
+@mixin cart_panel {
+    .craft_goods_panel_buy {
+        position: absolute;
+        bottom: -500px;
+        width: 100%;
+        overflow: hidden !important;
+        left: 0px;
+        height: 334px !important;
+        background-color: white;
+        z-index: 10001;
+        -moz-transition: all ease-in-out 0.3s;
+        -webkit-transition: all ease-in-out 0.3s;
+        -o-transition: all ease-in-out 0.3s;
+        transition: all ease-in-out 0.3s;
+    }
+    .craft_goods_detail_close {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        height: 20px;
+        width: 30px;
+        height: 30px;
+        background: url(../img/craft_goods_detail_close.png) no-repeat center center;
+        background-size: 14px;
+    }
+    .craft_panel_chosed {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-justify-content: flex-start;
+        justify-content: flex-start;
+        padding-left: 12px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+        border-bottom: 1px solid #f1f1f1;
+        margin-bottom: 4px;
+    }
+    .craft_panel_chosed li:last-of-type {
+        padding-top: 16px;
+        color: #982424;
+        font-size: 1.7rem;
+        padding-left: 10px;
+        -ms-flex: 1;
+        -webkit-flex: 1;
+        flex: 1;
+        overflow: hidden;
+    }
+    .craft_panel_chosed li span {
+        display: block;
+        max-width: 88%;
+    }
+    .craft_panel_chosed li p {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 88%;
+        font-size: 1.5rem;
+        color: black;
+    }
+    .goods-section {
+        width: 100%;
+        line-height: 2em;
+        min-height: 2em;
+        font-size: 1em;
+        position: relative;
+        margin-bottom: 1em;
+    }
+    #goods_number_wrap {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-justify-content: space-between;
+        justify-content: space-between;
+        height: 42px;
+    }
+    .craft_add_goods {
+        height: 44px;
+        text-align: center;
+        line-height: 44px;
+        background-color: #982424;
+        color: white;
+        display: block;
+        width: 100%;
+        position: absolute;
+        bottom: 0px;
+    }
+    .goods-section .goods-field {
+        position: initial;
+        padding-left: 12px;
+        margin: 0px;
+        width: 100%;
+        overflow: hidden;
+        text-align: left;
+        font-size: 1.5rem;
+        left: 0px;
+        top: 0px;
+    }
+    .craft_goods_panel_buy #goods_specs_wrap .goods-value {
+        max-height: 100px;
+        overflow: auto;
+        border-bottom: 1px solid #f1f1f1;
+    }
+    #goods_specs_wrap .goods-value {
+        margin-left: 0px;
+        width: 100%;
+        text-align: center;
+        padding: 0px 12px 0 10px;
+    }
+    .goods-spec {
+        font-size: 0.8em;
+        margin: 8px 10px 6px 0px;
+        float: left;
+        padding: 4px 12px;
+        line-height: 1.5em;
+        border-radius: 6px;
+        background-color: #f1f1f1;
+        border: none;
+        color: #7e7e7e;
+    }
+    .goods-spec.craft-active {
+        color: white;
+        background-color: #982424;
+        border: none;
+    }
+    #goods_number_wrap .goods-field {
+        line-height: 42px;
+    }
+    #goods_number_wrap .goods-value {
+        width: 17rem;
+        margin-right: 35px;
+    }
+    .goods-number-op {
+        float: left;
+        display: inline-block;
+        width: 2em;
+        height: 2em;
+        margin-top: 0.5em;
+        line-height: 1em;
+        font-size: 1em;
+        text-align: center;
+        border: 1px solid #ccc;
+        padding: 0;
+        background: none;
+        color: #969696;
+    }
+    #goods_number {
+        width: 2em;
+        text-align: center;
+        line-height: 1.5em;
+        float: left;
+        border: 1px solid #ccc;
+        font-size: 1em;
+        padding: 0px;
+        height: 2em;
+        margin: 0px;
+        border-left: 0px;
+        border-right: 0px;
+        margin-top: 0.5em;
+    }
+}
+
+
+@mixin triangle($width, $height, $color: #000, $direction: bottom) {
+    $map-direction: (
+            top: bottom left right,
+            bottom: top left right,
+            left: right top bottom,
+            right: left top bottom
+    );
+    @if not map-has-key($map-direction, $direction) {
+        @error "triangle $direction 必须为：#{map-keys($map-direction)}";
+    }
+    $conf: map-get($map-direction, $direction);
+    @if $direction==top or $direction==bottom {
+        $width: $width/2;
+    }
+    @else {
+        $height: $height/2;
+    }
+
+    height: 0;
+    width: 0;
+    border-#{nth($conf, 1)}: $height solid $color;
+    border-#{nth($conf, 2)}: $width solid transparent;
+    border-#{nth($conf, 3)}: $width solid transparent;
+}

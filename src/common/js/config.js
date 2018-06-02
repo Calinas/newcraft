@@ -1,0 +1,1 @@
+export const reqUrl = 'http://proxy91craft.onecoder.xyz'
