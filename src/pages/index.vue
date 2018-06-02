@@ -54,6 +54,7 @@ import {reqUrl} from '@/common/js/config.js'
 import {mapMutations} from 'vuex'
 import Loading from '@/components/Loading'
 import Scroll from '@/components/scroll'
+import {getBannerList,getIndexWaterfall} from '@/api/index.js'
 export default {
   components: {
     swiper,
@@ -100,35 +101,25 @@ export default {
         setWeiboId: 'SET_WEIBOID'
       }),
     setSlideApi: function() {
-      let that = this;
-      axios.get('/api/v1/index/banner',{
-        params: {
-          place: "w3g_goods_index_main"
-        }
-      }).then(function(res){
-        that.slides = res.data.list
+      getBannerList().then(res => {
+        this.slides = res.data.list
       })
     },
     getWaterfall() {
       if (this.loadFinished) return;
       if (this.loading) return;
       this.loading = true;
-      let that = this;
-      axios.get('/api/v1/index/flow',{
-        params: {
-          pn: that.page
-        }
-      }).then(function(res){
-          if (!res.status || res.data.list.length == 0) {
-            that.loadFinished = true;
+      getIndexWaterfall(this.page).then(res => {
+        if (!res.status || res.data.list.length == 0) {
+            this.loadFinished = true;
           } else {
             if (res.data.list.length < 10) {
-              that.loadFinished = true;
+              this.loadFinished = true;
             }
-            that.page = parseInt(that.page) + 1;
-            that.list = that.list.concat(res.data.list);
+            this.page = parseInt(this.page) + 1;
+            this.list = this.list.concat(res.data.list);
           }
-          that.loading = false;
+          this.loading = false;
       })
     },
     loadImage() {
