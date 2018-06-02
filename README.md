@@ -1,3 +1,9 @@
+A update version of 91craft.com. Not fully finished. Using vue + vuex + es6 + webpack + axios.
+
+A perview version can be checked via this link.
+
+www.newcraft.xyz
+
 # awebsite
 
 > A Vue.js project
