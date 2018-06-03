@@ -1,7 +1,7 @@
 <template>
 <div class="container">
   <div class="navbar-container">
-    <navbar></navbar>
+    <navbar @clickHeader="clickHeader"></navbar>
   </div>
   <div class="scroll-container">
     <scroll :data="list" class="scroll-inner">
@@ -100,6 +100,11 @@ export default {
     ...mapMutations({
         setWeiboId: 'SET_WEIBOID'
       }),
+    clickHeader(){
+      this.$router.push({
+        path:'/login'
+      })
+    },
     setSlideApi: function() {
       getBannerList().then(res => {
         this.slides = res.data.list

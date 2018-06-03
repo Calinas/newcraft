@@ -19,9 +19,18 @@ export function getIndexWaterfall(page){
         page: page
     })
 
-    return axios.get(url,{
-        params: data
-    }).then(res => {
-        return Promise.resolve(res)
+    // return axios.get(url,{
+    //     params: data
+    // }).then(res => {
+    //     return Promise.resolve(res)
+    // })
+
+
+    return new Promise((resolve,reject) => {
+        axios.get(url,{
+            params: data
+        }).then(res => {
+            resolve(res)
+        })
     })
 }

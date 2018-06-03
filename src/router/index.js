@@ -11,7 +11,7 @@ import CourseIndex from '@/pages/course/index'
 import CourseDetail from '@/pages/course/detail'
 import CityList from '@/pages/activity/cityList'
 import ShoppingCart from '@/pages/ecommerce/shoppingcart'
-
+import Login from '@/pages/user/login'
 Vue.use(Router)
 
 export default new Router({
@@ -71,6 +71,11 @@ export default new Router({
             path: '/shoppingcart/',
             name: 'ShoppingCart',
             component: ShoppingCart
+        },
+        {
+            path: '/login/',
+            name: 'login',
+            component: Login
         }
     ],
 })

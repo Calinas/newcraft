@@ -1,16 +1,21 @@
 <template>
-    <div class="nav_bar">
-        <a href="" class="nav_post"></a>
+    <div class="nav_bar" @click="clickHeader">
+        <a href="#0" class="nav_post"></a>
         <input type="text" placeholder="请输入关键字搜索">
-        <a href="" class="nav_cart"></a>
-        <a href="" class="nav_cart nav_message"></a>
-        <a href="" class="nav_personal"></a>
+        <a href="#0" class="nav_cart"></a>
+        <a href="#0" class="nav_cart nav_message"></a>
+        <a href="#0" class="nav_personal"></a>
     </div>
 </template>
 
 <script>
     export default {
-        name: 'navbar'
+        name: 'navbar',
+        methods: {
+            clickHeader(){
+                this.$emit('clickHeader')
+            }
+        }
     }
 </script>
 
