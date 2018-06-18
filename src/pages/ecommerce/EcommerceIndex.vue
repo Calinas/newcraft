@@ -49,9 +49,11 @@
     import LineTitle from '@/components/lineTitle'
     import ProductCard from '@/components/ProductCard'
     import toolbar from '@/components/toolbar'
-    import GoodsCard from '@/common/js/goods'
+    import {normalizeGoodsData} from '@/common/js/goods'
     import {mapGetters,mapMutations} from 'vuex'
     import {getParamFromUrl} from '@/common/js/util'
+
+
     export default {
         components: {
             navbar,
@@ -134,20 +136,6 @@
                 // });
                 this.$router.push({ path: `/goodsDetail/${itemId}` })
             },
-            _normalizeProductList(list){
-                let ret = []
-                list.forEach((item,index) => {
-                    let name = item.brand && item.brand.name ? item.brand.name : ''
-                    ret.push({
-                        avatar: item.default_image,
-                        title: item.goods_name,
-                        brand: name,
-                        price: item.price,
-                        id: item.params.goods_id
-                    })
-                })
-                return ret
-            },
             navJumpPage(menuData){
                 const categoryId = getParamFromUrl(menuData.url,'cid')
                 this.setGoodsCategoryId(categoryId)
@@ -174,7 +162,7 @@
                                 that.loadFinished = true;
                             }
                             that.page = parseInt(that.page) + 1;
-                            that.indexProductList = that.indexProductList.concat(that._normalizeProductList(res.data.list));
+                            that.indexProductList = that.indexProductList.concat(normalizeGoodsData(res.data.list));
                         }
                         that.loading = false;
                     })

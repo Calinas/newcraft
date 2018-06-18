@@ -1,5 +1,4 @@
 <template>
-
     <scroll ref="goodsList" class="goods-list" :data="goodsList" :pullup="pullup" @scrollToEnd="loadMore">
         <div class="indexProductList">
                 <ul>
@@ -20,7 +19,7 @@ import {getGoodsList} from '@/api/ecommerce'
 import {mapGetters} from 'vuex'
 import Scroll from '@/components/scroll'
 import ProductCard from '@/components/ProductCard'
-
+import {normalizeGoodsData} from '@/common/js/goods'
 
 export default {
     data(){
@@ -52,7 +51,7 @@ export default {
             }
             getGoodsList(this.ps,this.pn,params).then(res => {
                 if(res.status){
-                    this.goodsList = this._normalizeProductList(res.data.list)
+                    this.goodsList = normalizeGoodsData(res.data.list)
                     this.checkLoadFinished(res.data.list)
                 }
             })
@@ -66,25 +65,11 @@ export default {
             }
             getGoodsList(this.ps,this.pn,params).then(res => {
                 if(res.status){
-                    this.goodsList = this.goodsList.concat(this._normalizeProductList(res.data.list))
+                    this.goodsList = this.goodsList.concat(normalizeGoodsData(res.data.list))
                     this.checkLoadFinished(res.data.list)
                 }
             })
         }, 
-         _normalizeProductList(list){
-                let ret = []
-                list.forEach((item,index) => {
-                    let name = item.brand && item.brand.name ? item.brand.name : ''
-                    ret.push({
-                        avatar: item.default_image,
-                        title: item.goods_name,
-                        brand: name,
-                        price: item.price,
-                        id: item.params.goods_id
-                    })
-                })
-                return ret
-            },
         checkLoadFinished(list){
             if(list.lenght < this.ps){
                 this.loadFinished = true
