@@ -1,7 +1,7 @@
 <template>
     <transition name="slide">
         <div class="container">
-            <div>返回</div>
+            <div @click="back">返回</div>
             <div class="input-wrapper">
                 <div class="input">
                     <input type="text" class="first" placeholder="请输入您的账号" v-model="username">
@@ -39,6 +39,9 @@ export default {
         ...mapMutations({
             SET_USER: 'SET_USER'
         }),
+        back(){
+            this.$router.back()
+        },
         userLogin(){
             login(this.username,this.password).then(res => {
                 console.log(res)
