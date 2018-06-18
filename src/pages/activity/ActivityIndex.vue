@@ -25,10 +25,9 @@
         </template>
       </div>
 
-      <div class="more_loading" v-show="loading">
-        <mt-spinner type="fading-circle" color="#fff" :size="50" v-show="loading && ! loadFinished"></mt-spinner>
-        <span v-show="loadFinished">已全部加载</span>
-      </div>
+      <div class="more-loading">
+            <loading title="加载中" v-show="isLoading"></loading>
+        </div>
         </div>
       </scroll>
     </div>
@@ -43,6 +42,7 @@
   import navbar from '@/components/navbar'
   import toolbar from '@/components/toolbar'
   import Scroll from '@/components/scroll'
+  import Loading from '@/components/Loading'
   export default {
     components: {
       ActivityCard,
@@ -50,7 +50,8 @@
       toolbar,
       swiper,
       swiperSlide,
-      Scroll
+      Scroll,
+      Loading
     },
     data() {
       return {
@@ -75,7 +76,7 @@
         list: [],
         page: 1,
         loadFinished: false,
-        loading: false,
+        isLoading: false,
         menuList: [],
         categoryId: 0
       }
@@ -94,8 +95,8 @@
       },
       _getActivityList() {
         if (this.loadFinished) return;
-        if (this.loading) return;
-        this.loading = true;
+        if (this.isLoading) return;
+        this.isLoading = true;
         let that = this;
         axios.get('api/v1/activity/index', {
             params: {
@@ -114,7 +115,7 @@
               that.page = parseInt(that.page) + 1;
               that.list = that.list.concat(res.data.list);
             }
-            that.loading = false;
+            that.isLoading = false;
           })
       },
       changeCategory: function(e){

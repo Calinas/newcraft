@@ -20,6 +20,9 @@
     image[lazy=loading] {
         width: 100%;
     }
+    .more-loading {
+        margin-bottom: 60px;
+    }
     .fix-scroll-out {
         overflow: hidden;
         height: 100vh;

@@ -28,9 +28,8 @@
                     </li>
 
                 </ul>
-                <div class="more_loading" v-show="loading">
-                    <mt-spinner type="fading-circle" color="#fff" :size="50" v-show="loading && ! loadFinished"></mt-spinner>
-                    <span v-show="loadFinished">已全部加载</span>
+                <div class="more-loading" v-show="isLoading">
+                    <loading title="加载中"></loading>
                 </div>
             </div>
         </div>
@@ -52,7 +51,7 @@
     import {normalizeGoodsData} from '@/common/js/goods'
     import {mapGetters,mapMutations} from 'vuex'
     import {getParamFromUrl} from '@/common/js/util'
-
+    import Loading from '@/components/Loading'
 
     export default {
         components: {
@@ -62,7 +61,8 @@
             IndexMenu,
             LineTitle,
             ProductCard,
-            toolbar
+            toolbar,
+            Loading
         },
         data() {
             return {
@@ -82,7 +82,7 @@
                 indexProductList:[],
                 page: 1,
                 loadFinished: false,
-                loading: false,
+                isLoading: false,
                 cidList:[]
             }
         },
@@ -145,8 +145,8 @@
             },
             getProductList() {
                 if (this.loadFinished) return;
-                if (this.loading) return;
-                this.loading = true;
+                if (this.isLoading) return;
+                this.isLoading = true;
                 let that = this;
                 axios.get('api/v1/goods/indexGoodsList',{
                     params: {
@@ -164,7 +164,7 @@
                             that.page = parseInt(that.page) + 1;
                             that.indexProductList = that.indexProductList.concat(normalizeGoodsData(res.data.list));
                         }
-                        that.loading = false;
+                        that.isLoading = false;
                     })
             }
         }

@@ -8,8 +8,8 @@
 
                 </ul>
             </div>
-        <div class="more_loading" v-show="loading">
-            <span v-show="loadFinished">已全部加载</span>
+        <div class="more-loading">
+            <loading title="加载中" v-show="isLoading"></loading>
         </div>
     </scroll>
 </template>
@@ -20,7 +20,7 @@ import {mapGetters} from 'vuex'
 import Scroll from '@/components/scroll'
 import ProductCard from '@/components/ProductCard'
 import {normalizeGoodsData} from '@/common/js/goods'
-
+import Loading from '@/components/Loading'
 export default {
     data(){
         return {
@@ -28,13 +28,14 @@ export default {
             ps: 10,
             pn: 1,
             pullup: true,
-            loadFinished: false,
-            loading: false
+            isLoadFinished: false,
+            isLoading: false
         }
     },
     components: {
         Scroll,
-        ProductCard
+        ProductCard,
+        Loading
     },
     computed: {
         ...mapGetters([
@@ -49,16 +50,19 @@ export default {
             const params = {
                 category_id: this.goodsCategoryId
             }
+            this.isLoading = true
             getGoodsList(this.ps,this.pn,params).then(res => {
                 if(res.status){
                     this.goodsList = normalizeGoodsData(res.data.list)
                     this.checkLoadFinished(res.data.list)
+                    this.isLoading = false
                 }
             })
         },
         loadMore(){
-            if(this.loadFinished) return
-            if(this.loading) return
+            if(this.isLoadFinished) return
+            if(this.isLoading) return
+            this.isLoading = true
             this.pn++
             const params = {
                 category_id: this.goodsCategoryId
@@ -67,12 +71,13 @@ export default {
                 if(res.status){
                     this.goodsList = this.goodsList.concat(normalizeGoodsData(res.data.list))
                     this.checkLoadFinished(res.data.list)
+                    this.isLoading = false
                 }
             })
         }, 
         checkLoadFinished(list){
             if(list.lenght < this.ps){
-                this.loadFinished = true
+                this.isloadFinished = true
             }
         }
     }
