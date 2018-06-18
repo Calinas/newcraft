@@ -1,6 +1,5 @@
 <template>
-
-        <a href="" class="nav__item">
+        <a href="javascript:;" class="nav__item" @click="jumpPage(menuData)">
             <img :src="menuData.cover" alt="">
             <span class="text">{{menuData.title}}</span>
         </a>
@@ -16,6 +15,11 @@
         data () {
             return {
 
+            }
+        },
+        methods: {
+            jumpPage(menuData){
+                this.$emit('navJumpPage',menuData)
             }
         }
     }

@@ -12,6 +12,9 @@ import CourseDetail from '@/pages/course/detail'
 import CityList from '@/pages/activity/cityList'
 import ShoppingCart from '@/pages/ecommerce/shoppingcart'
 import Login from '@/pages/user/login'
+import GoodsList from '@/pages/ecommerce/goodsList'
+
+
 Vue.use(Router)
 
 export default new Router({
@@ -76,6 +79,11 @@ export default new Router({
             path: '/login/',
             name: 'login',
             component: Login
+        },
+        {
+            path: '/goodslist/',
+            name: 'goodslist',
+            component: GoodsList
         }
     ],
 })

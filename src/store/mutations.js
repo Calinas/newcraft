@@ -6,6 +6,9 @@ const mutations = {
     },
     [types.SET_USER](state,userInfo){
         state.userInfo = userInfo
+    },
+    [types.SET_GOODS_CATEGORY_ID](state,goodsCategoryId){
+        state.goodsCategoryId = goodsCategoryId
     }
 }
 

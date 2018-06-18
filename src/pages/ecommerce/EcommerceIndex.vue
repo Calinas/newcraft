@@ -13,7 +13,7 @@
 
             <div class="goods-nav">
                 <div v-for="item in indexMenuList" class="nav-item">
-                    <index-menu :menuData="item"></index-menu>
+                    <index-menu :menuData="item" @navJumpPage="navJumpPage"></index-menu>
                 </div>
             </div>
 
@@ -35,7 +35,6 @@
             </div>
         </div>
         <toolbar></toolbar>
-           
     </div>
 </template>
 
@@ -51,6 +50,8 @@
     import ProductCard from '@/components/ProductCard'
     import toolbar from '@/components/toolbar'
     import GoodsCard from '@/common/js/goods'
+    import {mapGetters,mapMutations} from 'vuex'
+    import {getParamFromUrl} from '@/common/js/util'
     export default {
         components: {
             navbar,
@@ -79,7 +80,8 @@
                 indexProductList:[],
                 page: 1,
                 loadFinished: false,
-                loading: false
+                loading: false,
+                cidList:[]
             }
         },
         computed: {
@@ -92,6 +94,9 @@
             this.getProductList();
         },
         methods: {
+            ...mapMutations({
+                setGoodsCategoryId: 'SET_GOODS_CATEGORY_ID'
+            }),
             setSlideApi(){
                 let that = this;
                 axios
@@ -111,29 +116,44 @@
                 })
                     .then(function (res){
                         that.indexMenuList = res.data.list;
+                        that.cidList = that.getCid(that.indexMenuList)
                     })
             },
+            getCid(list){
+                let ret = []
+                ret = list.map(item => {
+                    return getParamFromUrl(item.url,'cid')
+                })
+                return ret
+            },
             handleClick(itemId) {
-                let initMsg = Toast({
-                    message: '页面跳转还没完成哦',
-                    position: 'middle',
-                    duration: 2000
-                });
+                // let initMsg = Toast({
+                //     message: '页面跳转还没完成哦',
+                //     position: 'middle',
+                //     duration: 2000
+                // });
                 this.$router.push({ path: `/goodsDetail/${itemId}` })
             },
             _normalizeProductList(list){
                 let ret = []
                 list.forEach((item,index) => {
                     let name = item.brand && item.brand.name ? item.brand.name : ''
-                    ret.push(new GoodsCard({
+                    ret.push({
                         avatar: item.default_image,
                         title: item.goods_name,
                         brand: name,
                         price: item.price,
                         id: item.params.goods_id
-                    }))
+                    })
                 })
                 return ret
+            },
+            navJumpPage(menuData){
+                const categoryId = getParamFromUrl(menuData.url,'cid')
+                this.setGoodsCategoryId(categoryId)
+                this.$router.push({
+                    path:`/goodslist`
+                })
             },
             getProductList() {
                 if (this.loadFinished) return;
