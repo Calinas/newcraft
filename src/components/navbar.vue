@@ -2,7 +2,7 @@
     <div class="nav_bar">
         <a href="/cityList" class="nav_post"></a>
         <input type="text" placeholder="请输入关键字搜索">
-        <a href="#0" class="nav_cart"></a>
+        <a href="/shoppingcart" class="nav_cart"></a>
         <a href="#0" class="nav_cart nav_message"></a>
         <a href="/login" class="nav_personal"></a>
         <!-- <router-link :to="{path: '/cityList'}" tag="a" class="nav_post">点击我跳转到列表页面</router-link> -->

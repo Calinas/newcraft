@@ -96,7 +96,7 @@
             <li class="width30 bg-red">立即带走</li>
         </ul>
         <div class="mask" v-show="flag.isShowPanel"></div>
-        <goods-panel :isShow="flag.isShowPanel" :specList="specList" :activeSpecList="activeSpecList" :quantity="quantity" :currentSpecId="currentSpecId" @mutateQuantity="mutateQuantity" @closePanel="closePanel" @selectSpec="selectSpec" @clickBuy="clickBuy"></goods-panel>
+        <goods-panel ref="goodspanel" :isShow="flag.isShowPanel" :specList="specList" :activeSpecList="activeSpecList" :currentSpecId="currentSpecId" @mutateQuantity="mutateQuantity" @changeNumber="changeNumber" @closePanel="closePanel" @selectSpec="selectSpec" @clickBuy="clickBuy"></goods-panel>
     </div>
 
 </template>
@@ -209,7 +209,6 @@
                 this.flag.isShowPanel = false
             },
             openPanel(){
-                console.log('22')
                 this.flag.isShowPanel = true
             },
             selectSpec(currentSpecId){
@@ -227,6 +226,10 @@
                 if(type === 'add'){
                     this.quantity = this.quantity + 1 < this.maxQuantity ? this.quantity + 1 : this.maxQuantity
                 }
+                this.$refs.goodspanel.setQuantity(this.quantity)
+            },
+            changeNumber(data){
+                this.quantity = parseInt(data)
             },
             clickBuy(){
                 let _this = this;

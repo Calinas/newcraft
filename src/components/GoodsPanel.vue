@@ -32,7 +32,7 @@
                         <div class="goods-field">购买数量</div>
                         <div class="goods-value">
                             <button class="goods-number-op" @click="mutateQuantity('minus')">-</button>
-                            <input id="goods_number" name="goods_number" type="number" v-model="quantity" disabled>
+                            <input id="goods_number" name="goods_number" type="number" v-model="number">
                             <button class="goods-number-op" @click="mutateQuantity('add')">+</button>
                         </div>
                     </div>
@@ -52,12 +52,16 @@
             isShow: false,
             specList:Array,
             activeSpecList:{},
-            quantity: 0,
             currentSpecId: 0
         },
         data () {
             return {
-                 
+                number: 0 
+            }
+        },
+        watch: {
+            number() {
+                this.$emit('changeNumber',this.number)
             }
         },
         methods: {
@@ -73,6 +77,9 @@
             },
             clickBuy(){
                 this.$emit('clickBuy')
+            },
+            setQuantity(q){
+                this.number = q
             }
         }
     }
