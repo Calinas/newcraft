@@ -7,7 +7,6 @@
     <div class="scroll-container">
       <scroll :data="list" class="scroll-inner">
         <div>
-          <router-link :to="{path: '/cityList'}" tag="a">点击我跳转到列表页面</router-link>
           <div class="swiper-container-menu">
         <swiper :options="swiperOption" ref="mySwiper">
             <swiper-slide v-for="item in menuList">
@@ -127,7 +126,7 @@
 
 </script>
 
-<style>
+<style scoped>
   .swiper-container-menu {
     position: relative;
     margin-bottom: 10px;

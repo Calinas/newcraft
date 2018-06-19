@@ -132,7 +132,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
     .item {
         border-bottom: 1px solid #f2f2f2;
         padding-bottom: 8px;

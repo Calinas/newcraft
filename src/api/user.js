@@ -4,7 +4,8 @@ export function login(username,password){
     const url = '/api/v1/auth/login'
     const data = {
         phone: username,
-        password: password
+        password: password,
+        user_token: 'D9B3E2DC915F98BA2A8E333BCC258D0C'
     }
     return new Promise((resolve,reject) => {
         axios.post(url,{

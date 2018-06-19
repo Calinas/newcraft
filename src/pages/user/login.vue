@@ -51,7 +51,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .container {
         height: 100vh;
         background: url(http://www.91craft.com/apps/w3g/_static/img/login-screen-bg.jpg) center center;
