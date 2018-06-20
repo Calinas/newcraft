@@ -1,7 +1,7 @@
 import axios from 'axios'
 import vue from 'vue'
 
-axios.defaults.baseURL = 'http://webpack.dev.91craft.com'
+axios.defaults.baseURL = 'http://proxy91craft.onecoder.xyz'
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
 
 // // 请求拦截器
@@ -22,7 +22,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 //     return new Promise((resolve, reject) => {
 //         axios.post(url, params)
 //             .then(response => {
-//                 resolve(response.data);
+//                 resolve(response.data);npm
 //             })
 //             .catch((error) => {
 //                 reject(error);
